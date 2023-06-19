@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>ChatGPT Function Call Builder</title>
+</head>
+<body>
+    <h1>ChatGPT Function Call Builder</h1>
+    
+    <details>
+        <summary>How to use</summary>
+        <p>If you want a JSON object from ChatGPT, this tool is for you.</p>
+        <p>Enter the property names and what you want to use them for. This is separate from your prompt, but should reinforce it by telling ChatGPT how you're going to use the data it returns.</p>
+        <p>Copy and paste the resulting <code>functions</code> and <code>function_call</code> properties into the <code>create()</code> method of your ChatGPT request, alongside the <code>model</code> and <code>messages</code> properties.
+    </details>
+    
+    <h2>Desired output properties from ChatGPT</h2>
+    
+    <form id="inputForm">
+        <fieldset class="field-pair">
+            <div class="input-group property">
+                <label for="input_property0">Property name:</label>
+                <input type="text" id="input_property0" name="input_property0" placeholder="E.g. title" data-output-id="output_property0">
+            </div>
+            <div class="input-group description">
+                <label for="description0">Description:</label>
+                <input type="text" id="input_description0" name="input_description0" placeholder="E.g. The title of the content."  data-output-id="output_description0">
+            </div>
+
+        </fieldset>
+
+        <button type="button" id="addFieldButton" aria-label="Button to add a property">Add a property</button>
+        <button type="button" id="removeFieldButton" class="hidden remove-btn" aria-label="Button to remove the last property">Remove property</button>
+    </form>
+
+    <h2>Input for ChatGPT API (Python)</h2>
+    
+    <textarea id="code-output" role="textbox" rows="17"></textarea>
+    
+    <h2>Likely JSON output from ChatGPT</h2>
+    
+    <div id="chatgpt_object">
+    {
+        <span id="chatgpt_object_content"><span class="output-pair">"<span id="output_property0"></span>": "[content from ChatGPT]"</span></span>
+    }
+    </div>
+
+    <div class="hidden" id="chatgpt_temp">functions = [
+    {
+        "name": "get_current_weather",
+        "description": "Get the current weather in a given location",
+        "parameters": {
+            "type": "object",
+            "properties": {<span id="properties_content">
+                "<span id="hidden_property0"></span>": {
+                    "type": "string",
+                    "description": "<span id="hidden_description0"></span>"
+                }</span>
+            },
+            "required": [<span id="hidden_required_list">"<span id="hidden_required0"></span>"</span>]
+        }
+    }
+],
+function_call = {
+    "name": functions[0]["name"]
+}
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
